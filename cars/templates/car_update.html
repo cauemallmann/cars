@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Atualizar Carro{% endblock %}
+
+{% block content %}
+  <style>
+    .update-car-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #000000;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .update-car-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .update-car-container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .update-car-container label {
+      margin: 10px 0 5px;
+      text-align: left;
+    }
+
+    .update-car-container input,
+    .update-car-container select,
+    .update-car-container textarea {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ecc440;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+
+    .update-car-container input[type="submit"] {
+      background-color: #ecc440;
+      color: #000000;
+      font-weight: bold;
+      border: 2px solid #ecc440;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .update-car-container input[type="submit"]:hover {
+      background-color: #000000;
+      color: #ecc440;
+    }
+
+    .back-button {
+        display: inline-block;
+        margin-top: 20px;
+        color: black;
+        background-color: #ecc440;
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 2px solid #ecc440;
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .back-button:hover {
+        color: #ecc440;
+        background-color: black;
+    }
+
+  </style>
+
+  <div class="update-car-container">
+    <h2>Atualizar Carro</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Atualizar">
+      <a href="{% url 'car_delete' car.pk %}" class="back-button">Deletar</a>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.form-new-car {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+
+<h3> Anuncie seu carro conosco: </h3>
+<br>
+<div class="form-new-car">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    {% comment %} {{ new_car_form.non_field_errors }} {% endcomment %}
+    </table>
+    <input type="submit" value="Cadastrar" class="btn-primary">
+</form>
+</div> 
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .form-group label {
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .form-group input {
+        padding: 8px;
+        width: 100%;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 5px 5px;
+        background-color: #ecc440;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+        width: 40%;
+        box-sizing: border-box;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .success {
+        color: white;
+        background-color: green;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 400px;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h2>Cadastro de usuário:</h2>
+    <div class="form-group">
+        <label>Usuário:</label>
+        {{ user_form.username }}
+        {% for error in user_form.username.errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <label>Senha:</label>
+        {{ user_form.password1 }}
+        {% for error in user_form.password1.errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <label>Confirme a senha:</label>
+        {{ user_form.password2 }}
+        {% for error in user_form.password2.errors %}
+        <div class="error">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Cadastrar">
+    </div>
+
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</form>
+
+{% endblock %}

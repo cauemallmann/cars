@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir Carro{% endblock %}
+
+{% block content %}
+<style>
+    .car-delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #000000;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .car-delete-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .car-delete-container p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .car-delete-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .confirm-btn, .cancel-btn {
+        background-color: #ecc440;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .confirm-btn:hover {
+        background-color: #000000;
+        color: #ecc440;
+    }
+
+    .cancel-btn:hover {
+        background-color: #000000;
+        color: #ecc440;
+    }
+</style>
+
+<div class="car-delete-container">
+    <h2>Excluir Carro</h2>
+    <p>Tem certeza de que deseja excluir o carro "{{ car.model }}"?</p>
+    <div class="car-delete-buttons">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="confirm-btn">Confirmar</button>
+        </form>
+        <a href="{% url 'car_detail' car.pk %}" class="cancel-btn">Cancelar</a>
+    </div>
+</div>
+
+{% endblock %}
